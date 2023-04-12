@@ -27,6 +27,10 @@ function App() {
 
       <Home />
 
+      <About />
+
+      <Projects />
+
     </div>
   )
 };
