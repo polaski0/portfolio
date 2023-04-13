@@ -1,6 +1,95 @@
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import '../assets/css/Home.css';
 import { gsap } from 'gsap';
+
+function Home() {
+    const heroRef = useRef('');
+    // const loopCounter = useRef(1.5);
+    // const [isLooping, setIsLooping] = useState(true);
+
+    // useLayoutEffect(() => {
+    //     let ctx = gsap.context(() => {
+    //         gsap.fromTo('.card-wrapper', { opacity: 0 }, { opacity: 1, delay: 0.3 });
+    //         const cards = gsap.utils.toArray(".card-container"),
+    //             loop = horizontalLoop(cards, { paused: true });
+
+    //         const interval = setInterval(() => {
+    //             if (loopCounter.current > 0) {
+    //                 loop.next({ duration: 2 - loopCounter.current, ease: 'power2.out' });
+    //             }
+
+    //             loopCounter.current -= 0.1;
+    //         }, 100);
+
+    //         return () => clearInterval(interval);
+    //     }, heroRef);
+
+    //     return () => ctx.revert();
+    // }, []);
+
+    const counter = useRef(0);
+    const isPaused = useRef(false);
+
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+            gsap.fromTo('.card-wrapper', { opacity: 0 }, { opacity: 1, duration: 2 });
+            const cards = gsap.utils.toArray('.card-container'),
+                loop = horizontalLoop(cards, { paused: true });
+
+            const interval = setInterval(() => {
+                if (counter.current <= 10) {
+                    loop.next({ duration: 0.2 + (counter.current / 100), ease: counter.current >= 5 ? 'power1.out' : 'none' });
+                } else {
+                    isPaused.current = true;
+                }
+
+                counter.current += 1;
+            }, 100);
+
+            return () => clearInterval(interval);
+        }, heroRef);
+
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <section className="hero" ref={heroRef}>
+            <div className="content">
+                <div>
+                    <h3 className='name'>Meynard Julien B. Trinidad</h3>
+                    <h4 className='position'>Junior Web Developer</h4>
+                </div>
+                <div className='divider'></div>
+                <div>
+                    <p className='description'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium voluptates ab magnam labore quae adipisci reprehenderit commodi optio pariatur similique! Quod assumenda unde non eaque aperiam reiciendis! Possimus, repellendus hic.</p>
+                </div>
+            </div>
+            <div className='card-wrapper'>
+                <Card />
+                <Card />
+                <Card isMain={true} />
+                <Card />
+                <Card />
+                <Card />
+            </div>
+        </section>
+    )
+}
+
+function Card({ isMain = false }) {
+    return (
+        <div className={`card-container ${isMain && 'main-card'}`}>
+            <div className='card'>
+                <div className='card-overlay'></div>
+                {
+                    isMain && (
+                        <img className='card-image' src="images/Profile.jpg" alt="Meynard Julien" />
+                    )
+                }
+            </div>
+        </div>
+    )
+}
 
 function horizontalLoop(items, config) {
     items = gsap.utils.toArray(items);
@@ -58,88 +147,6 @@ function horizontalLoop(items, config) {
         tl.reverse();
     }
     return tl;
-}
-
-function Card() {
-    return (
-        <div className="card">
-            <div className='card-overlay'></div>
-            {/* <img className='card-image' src="images/Profile.jpg" alt="Meynard Julien" /> */}
-        </div>
-    )
-}
-
-function Home() {
-    const heroRef = useRef();
-    let counter = 0;
-
-    useLayoutEffect(() => {
-        let ctx = gsap.context(() => {
-            // gsap.fromTo('.card', {
-            //     x: '-100vw',
-            // },
-            //     {
-            //         x: 0,
-            //         duration: 1,
-            //         ease: 'circ.out'
-            //     });
-            // gsap.fromTo('.left', {
-            //     opacity: 0,
-            // },
-            //     {
-            //         opacity: 1
-            //     });
-
-            const cards = gsap.utils.toArray(".card"),
-                loop = horizontalLoop(cards, { paused: true });
-
-            // add click listeners so you can click a box to have it move to the first slot
-            cards.forEach((card, i) => card.addEventListener("click", () => loop.toIndex(i, { duration: 1, ease: "power1.inOut" })));
-
-            const interval = setInterval(() => {
-                loop.next({ duration: 1 });
-            }, 500);
-
-            return () => clearInterval(interval);
-
-            // make the "next" and "previous" buttons call the appropriate methods on the timeline
-            // document.querySelector(".next").addEventListener("click", () => loop.next({ duration: 1, ease: "power1.inOut" }));
-            // document.querySelector(".prev").addEventListener("click", () => loop.previous({ duration: 1, ease: "power1.inOut" }));
-
-
-        }, heroRef);
-
-        return () => ctx.revert();
-    }, []);
-
-    return (
-        <section className="hero" ref={heroRef}>
-            <div className="content">
-                <div>
-                    <h3 className='name'>Meynard Julien B. Trinidad</h3>
-                    <h4 className='position'>Junior Web Developer</h4>
-                </div>
-                <div className='divider'></div>
-                <div>
-                    <p className='description'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium voluptates ab magnam labore quae adipisci reprehenderit commodi optio pariatur similique! Quod assumenda unde non eaque aperiam reiciendis! Possimus, repellendus hic.</p>
-                </div>
-            </div>
-            <div className='card-wrapper'>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-            </div>
-            {/* <div className="right">
-                <div className="card">
-                    <div className='card-overlay'></div>
-                    <img className='card-image' src="images/Profile.jpg" alt="Meynard Julien" />
-                </div>
-            </div> */}
-        </section>
-    )
 }
 
 export default Home;
