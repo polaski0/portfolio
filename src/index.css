@@ -22,7 +22,9 @@
 
 body {
   background-color: #242424;
-  padding: 0 10rem;
+  /* padding: 0 10rem; */
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 a {
