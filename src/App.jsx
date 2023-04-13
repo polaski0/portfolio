@@ -10,11 +10,11 @@ import Projects from './pages/Projects';
  * Outline
  * 
  * Home
- * About
  * Projects
  *  - Barangay Management System
  *  - PAKiTsek
  *  - Sicat Dental Clinic
+ * About
  * 
  */
 
@@ -27,9 +27,9 @@ function App() {
 
       <Home />
 
-      <About />
-
       <Projects />
+
+      <About />
 
     </div>
   )

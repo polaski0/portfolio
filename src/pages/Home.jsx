@@ -1,19 +1,44 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import '../assets/css/Home.css';
 import { gsap } from 'gsap';
 
-function Home() {
+function Card() {
+    return (
+        <div className="card">
+            <div className='card-overlay'></div>
+        </div>
+    )
+};
 
-    const cardRef = useRef();
+function Home() {
+    const heroRef = useRef();
+    let counter = 0;
 
     useLayoutEffect(() => {
-        gsap.to(cardRef.current, {
-            rotation: '+=360'
-        })
-    });
+        let ctx = gsap.context(() => {
+            gsap.fromTo('.card', {
+                x: '-100vw',
+            },
+                {
+                    x: 0,
+                    duration: 1,
+                    ease: 'circ.out'
+                });
+            gsap.fromTo('.left', {
+                opacity: 0,
+            },
+                {
+                    opacity: 1
+                });
+
+
+        }, heroRef);
+
+        return () => ctx.revert();
+    }, []);
 
     return (
-        <section className="hero">
+        <section className="hero" ref={heroRef}>
             <div className="left">
                 <div>
                     <h3 className='name'>Meynard Julien B. Trinidad</h3>
@@ -25,7 +50,7 @@ function Home() {
                 </div>
             </div>
             <div className="right">
-                <div className="card" ref={cardRef}>
+                <div className="card">
                     <div className='card-overlay'></div>
                     <img className='card-image' src="images/Profile.jpg" alt="Meynard Julien" />
                 </div>
