@@ -4,11 +4,11 @@ import '../assets/css/Navbar.css';
 function Navbar() {
     return (
         <nav className='navbar'>
-            <a href="#" className='logo'>Meynard Trinidad</a>
+            <a href="#hero-page" className='logo'>Meynard Trinidad</a>
             <ul className='navlinks'>
-                <li><a href="#">Home</a></li>
+                <li><a href="#hero-page">Home</a></li>
+                <li><a href="#projects-page">Projects</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="#">Projects</a></li>
             </ul>
         </nav>
     )

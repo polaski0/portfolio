@@ -17,15 +17,32 @@
     width: 100%;
     height: 100%;
     z-index: 1;
+    margin-top: 12rem;
 }
 
-.content-wrapper>.divider {
-    width: 3rem;
-    height: 0.1rem;
-    border-radius: 5rem;
-    background: #ffffff;
+/* WORD STYLES */
+.name {
+    font-size: 4rem;
+    clip-path: inset(0);
 }
 
+.name>* {
+    display: inline-block;
+    padding: 0 0.5rem;
+}
+
+.position {
+    font-size: 1.2rem;
+    clip-path: inset(0);
+}
+
+.position>* {
+    display: inline-block;
+    padding: 0 0.12rem;
+    color: var(--cerulean);
+}
+
+/* CARD STYLES */
 .card-wrapper {
     height: 100%;
     width: 100%;
@@ -43,7 +60,7 @@
     aspect-ratio: 1/1.2;
     position: relative;
     flex-shrink: 0;
-    border: 2px solid #3b3b3b;
+    border: 2px solid var(--border);
     border-radius: 1rem;
     overflow: hidden;
 }
@@ -65,18 +82,26 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* filter: grayscale(1); */
 }
 
-.name {
-    display: inline-block;
-    font-size: 4rem;
+.backdrop {
+    position: absolute;
+    height: 24rem;
+    aspect-ratio: 1/1.2;
+    z-index: -1;
+    background: rgba(255, 255, 255, 0.3);
+    filter: blur(1rem);
+    animation: glow 5s infinite;
+    /* background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%); */
 }
 
-.name > * {
-    padding: 0 0.5rem;
-}
+@keyframes glow {
+    0%,
+    100% {
+        opacity: 0;
+    }
 
-.position {
-    font-size: 1.2rem;
+    50% {
+        opacity: 1;
+    }
 }

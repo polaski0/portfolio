@@ -27,7 +27,7 @@ function App() {
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      gsap.fromTo('.navbar', { y: -innerHeight }, { y: 0, duration: 1.5, ease: 'sine' });
+      gsap.fromTo('.navbar', { y: -innerHeight }, { y: 0, delay: 3, ease: 'expo' });
     }, appRef);
 
     return () => ctx.revert();
