@@ -22,6 +22,8 @@
 
 /* WORD STYLES */
 .name {
+    display: inline-block;
+    flex-direction: row;
     font-size: 4rem;
     clip-path: inset(0);
 }
@@ -32,7 +34,7 @@
 }
 
 .position {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     clip-path: inset(0);
 }
 
@@ -96,6 +98,7 @@
 }
 
 @keyframes glow {
+
     0%,
     100% {
         opacity: 0;
@@ -103,5 +106,37 @@
 
     50% {
         opacity: 1;
+    }
+}
+
+/* MOUSE STYLES */
+.mouse-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    color: #fff;
+    position: absolute;
+    z-index: 1;
+    font-size: 1.5rem;
+    bottom: 2rem;
+    left: 50%;
+    animation: 3s linear 1s infinite alternate bounce;
+}
+
+.arrow-icon {
+    font-size: 1rem;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(0.45rem);
     }
 }

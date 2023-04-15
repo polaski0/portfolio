@@ -3,7 +3,9 @@ import '../assets/css/About.css';
 
 function About() {
     return (
-        <div>About</div>
+        <div>
+            <h3>About</h3>
+        </div>
     )
 }
 

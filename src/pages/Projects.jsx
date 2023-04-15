@@ -5,12 +5,20 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * Projects
+ *  Barangay Management System (Laravel, JavaScript, Tailwind CSS)
+ *  PAKiTsek (CodeIgniter, JavaScript, CSS)
+ *  
+ *  
+ */
+
 function Projects() {
     const projectsRef = useRef('');
 
     return (
         <div id='projects-page' ref={projectsRef}>
-            <p>Projects</p>
+            <h3>Projects</h3>
         </div>
     )
 }

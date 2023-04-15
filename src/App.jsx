@@ -22,6 +22,7 @@ import Projects from './pages/Projects';
  * 
  */
 
+
 function App() {
   const appRef = useRef('');
 

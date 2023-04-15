@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import '../assets/css/Home.css';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Icon } from '@iconify/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function Home() {
     const heroRef = useRef('');
@@ -20,20 +24,23 @@ function Home() {
                 opacity: 1,
                 rotateY: 360 * 2,
                 duration: 1.5,
-                ease: 'bounce'
+                ease: 'bounce',
             })
-                .to(
-                    '.card-container', { css: { 'filter': 'grayscale(0)' }, duration: 0.2 }
-                )
-                .from(
-                    '.backdrop', { display: 'none' }
-                )
-                .from(words, {
+                .to('.card-container', {
+                    css: { 'filter': 'grayscale(0)' }, duration: 0.2
+                })
+                .from('.backdrop', {
+                    display: 'none'
+                }).from(words, {
+                    autoAlpha: 0,
                     stagger: 0.1,
                     y: '100%',
                     ease: 'expo'
-                }
-                );
+                }).from('.mouse-wrapper', {
+                    display: 'none',
+                    y: innerHeight,
+                    ease: 'expo'
+                });
         }, heroRef);
 
         return () => ctx.revert();
@@ -58,6 +65,10 @@ function Home() {
             </div>
             <div className='card-wrapper'>
                 <Card />
+            </div>
+            <div className='mouse-wrapper'>
+                <Icon icon="bi:mouse" />
+                <Icon icon="material-symbols:arrow-back-ios-new-rounded" className='arrow-icon' rotate={3} />
             </div>
         </section>
     )
